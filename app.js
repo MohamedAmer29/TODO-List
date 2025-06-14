@@ -6,14 +6,15 @@ const date = require(__dirname + "/date.js");
 const app = express();
 const mongoose = require("mongoose");
 const _ = require("lodash");
-
+const dotEnv = require("dotenv");
+dotEnv.config();
+const dataBase = process.env.DATABASE;
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-mongoose.connect(
-  "mongodb+srv://amer_29:JJoUiHr1Merxzdo9@cluster0.vhy9w.mongodb.net/todolistDB"
-);
+
+mongoose.connect(dataBase);
 
 const itemSchema = new mongoose.Schema({
   name: {
